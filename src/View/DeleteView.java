@@ -1,9 +1,11 @@
+package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import src.Controller.*;
 public class DeleteView extends JPanel implements ActionListener {
     protected JTextField nameField;
     private JLabel nameLabel;
@@ -23,6 +25,7 @@ public class DeleteView extends JPanel implements ActionListener {
     private JLabel aprojectLabel;
     private JLabel emptyLabel;
     protected JButton delete;
+    protected JButton exit;
     private DefaultTableModel amodel = new DefaultTableModel(0,0);
     protected JTable atable = new JTable(amodel);
     private DefaultTableModel pmodel = new DefaultTableModel(0,0);
@@ -30,6 +33,7 @@ public class DeleteView extends JPanel implements ActionListener {
     private final static String newline = "\n";
     private static final String solve = "Solve";
 
+    public DeleteView(){}
     public DeleteView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
@@ -37,6 +41,7 @@ public class DeleteView extends JPanel implements ActionListener {
         String[] acolumnNames = {"Actual projects"};
         amodel.setColumnIdentifiers(acolumnNames);
         for(String row:actualProyects){
+            row=row.replace("_"," ");
             elements.add(row);
             Object[] adata = elements.toArray();
             amodel.addRow(adata);
@@ -49,6 +54,7 @@ public class DeleteView extends JPanel implements ActionListener {
         String[] pcolumnNames = {"Past projects"};
         pmodel.setColumnIdentifiers(pcolumnNames);
         for(String row:pastProyects){
+            row=row.replace("_"," ");
             elements.add(row);
             Object[] pdata = elements.toArray();
             pmodel.addRow(pdata);
@@ -72,12 +78,13 @@ public class DeleteView extends JPanel implements ActionListener {
         lastnameField = new JTextField(20);
         lastnameLabel = new JLabel("Lastname/s:");
         delete = new JButton("Delete");
-        //Color color= new Color(163,38,56);
+        exit= new JButton("Go back");
         delete.setBackground(new Color(163,38,56));
+        exit.addActionListener(this);
         delete.addActionListener(this);
         idField.setText(String.valueOf(id));
-        nameField.setText(name);
-        lastnameField.setText(lastname);
+        nameField.setText(name.replace("_"," "));
+        lastnameField.setText(lastname.replace("_"," "));
         seniorityField.setText(String.valueOf(seniority));
         ageField.setText(String.valueOf(age));
         addressField.setText(address);
@@ -119,9 +126,23 @@ public class DeleteView extends JPanel implements ActionListener {
         add(jsa,c);
         c.gridx=4;
         add(jsp,c);
+        c.gridx=0;
+        c.gridy=7;
+        add(exit,c);
     }
     public void actionPerformed(ActionEvent evt) {
-    System.out.println("Exit");
-
+        if(evt.getSource() == exit) {
+            System.out.println("Exit");
+            super.setVisible(false);
+            super.remove(this);
+            Controller.MenuV();
+        }
+        else {
+            Controller.Delete(Integer.parseInt(idField.getText()));
+            System.out.println("Exit");
+            super.setVisible(false);
+            super.remove(this);
+            Controller.MenuV();
+        }
     }
 }

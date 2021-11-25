@@ -1,6 +1,7 @@
 /**
  *@author Moran Duque, Jose Alejandro
  */
+package src.Model;
 import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -35,7 +36,16 @@ public class Model{
                 String[] arr = line.split(",");
                 if(arr[0].length()!=0){
                     x++;
-                    Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList(arr[6].split(", "))),new ArrayList<String>(Arrays.asList(arr[5].split(", "))));
+                    if(arr.length>6){
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList(arr[6].split(" "))),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
+                        }
+                    else if(arr.length==6){
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
+                    }
+                    else{
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList("_")));
+                    }
+
                 }
                 else
                     exit=false;
@@ -45,9 +55,9 @@ public class Model{
     }
     public void writeData() throws IOException{
         int i;
-        String header="id,name,age,address,seniority,actual proyects,past proyects";
+        String header="id,name,age,address,seniority,actual projects,past projects";
         Files.writeString(Paths.get("Resources/Data/Database.csv"),header + System.lineSeparator());
-        for(i=1;i<nLines;i++){
+        for(i=1;i<Workers.length;i++){
             Files.writeString(Paths.get("Resources/Data/Database.csv"),Workers[i].toString().replace("[","").replace("]","") + System.lineSeparator(),StandardOpenOption.APPEND);
         }
         String end=",,,,,,total="+(i-1);
@@ -82,6 +92,7 @@ public class Model{
                 return "SUCCESSFUL";
             }
         }
+        System.out.println(nLines);
         return "Error";
     }
     public String update(int id, Worker worker){
@@ -93,7 +104,25 @@ public class Model{
         }
         return "Error";
     }
+    public boolean search(int id){
+        for(int i=1;i<Workers.length;i++){
+            if(Workers[i].getId()==id)
+                return true;
+        }
+        return false;
+    }
     public int getNLines(){
         return nLines;
+    }
+    public int getNextId(){
+        int[] ids = new int[nLines];
+        for(int i=1;i<Workers.length;i++)
+            ids[i]=Workers[i].getId();
+        Arrays.sort(ids);
+        for(int i=1;i<Workers.length;i++){
+            if(ids[i]!=i)
+                return i;
+        }
+        return Workers.length;
     }
 }

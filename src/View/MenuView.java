@@ -1,7 +1,9 @@
+package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import src.Controller.*;
 public class MenuView extends JPanel implements ActionListener {
     protected JButton create;
     protected JButton read;
@@ -41,9 +43,30 @@ public class MenuView extends JPanel implements ActionListener {
         if(evt.getSource() == exit) {
             System.out.println("Exit");
             System.exit(0);
-            }
+        }
         if(evt.getSource()==create){
-            setVisible(false);
+            super.setVisible(false);
+            super.remove(this);
+            Controller.state='c';
+            Controller.CreateV();
+        }
+        if(evt.getSource()==read){
+            super.setVisible(false);
+            super.remove(this);
+            Controller.state='r';
+            Controller.SearchV();
+        }
+        if(evt.getSource()==update){
+            super.setVisible(false);
+            super.remove(this);
+            Controller.state='u';
+            Controller.SearchV();
+        }
+        if(evt.getSource()==delete){
+            super.setVisible(false);
+            super.remove(this);
+            Controller.state='d';
+            Controller.SearchV();
         }
     }
 }

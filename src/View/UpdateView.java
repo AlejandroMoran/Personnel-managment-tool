@@ -1,9 +1,11 @@
+package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import src.Controller.*;
 public class UpdateView extends JPanel implements ActionListener {
     protected JTextField nameField;
     private JLabel nameLabel;
@@ -23,6 +25,7 @@ public class UpdateView extends JPanel implements ActionListener {
     private JLabel aprojectLabel;
     private JLabel emptyLabel;
     protected JButton save;
+    protected JButton exit;
     private DefaultTableModel amodel = new DefaultTableModel(0,0);
     protected JTable atable = new JTable(amodel);
     private DefaultTableModel pmodel = new DefaultTableModel(0,0);
@@ -30,6 +33,7 @@ public class UpdateView extends JPanel implements ActionListener {
     private final static String newline = "\n";
     private static final String solve = "Solve";
 
+    public UpdateView(){}
     public UpdateView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
@@ -37,6 +41,7 @@ public class UpdateView extends JPanel implements ActionListener {
         String[] acolumnNames = {"Actual projects"};
         amodel.setColumnIdentifiers(acolumnNames);
         for(String row:actualProyects){
+            row=row.replace("_"," ");
             elements.add(row);
             Object[] adata = elements.toArray();
             amodel.addRow(adata);
@@ -49,6 +54,7 @@ public class UpdateView extends JPanel implements ActionListener {
         String[] pcolumnNames = {"Past projects"};
         pmodel.setColumnIdentifiers(pcolumnNames);
         for(String row:pastProyects){
+            row=row.replace("_"," ");
             elements.add(row);
             Object[] pdata = elements.toArray();
             pmodel.addRow(pdata);
@@ -72,11 +78,13 @@ public class UpdateView extends JPanel implements ActionListener {
         lastnameField = new JTextField(20);
         lastnameLabel = new JLabel("Lastname/s:");
         save = new JButton("Save data");
+        exit = new JButton("Go back");
         idField.setEditable(false);
         save.addActionListener(this);
+        exit.addActionListener(this);
         idField.setText(String.valueOf(id));
-        nameField.setText(name);
-        lastnameField.setText(lastname);
+        nameField.setText(name.replace("_"," "));
+        lastnameField.setText(lastname.replace("_"," "));
         seniorityField.setText(String.valueOf(seniority));
         ageField.setText(String.valueOf(age));
         addressField.setText(address);
@@ -115,6 +123,9 @@ public class UpdateView extends JPanel implements ActionListener {
         add(jsa,c);
         c.gridx=4;
         add(jsp,c);
+        c.gridx=0;
+        c.gridy=7;
+        add(exit,c);
     }
     private class atableRow extends AbstractAction {
 
@@ -154,53 +165,80 @@ public class UpdateView extends JPanel implements ActionListener {
         }
     }
     public void actionPerformed(ActionEvent evt) {
-        boolean flag=true;
-        if(nameField.getText().length()==0){
-            flag=false;
-            nameLabel.setForeground (Color.red);
-        }
-        else{
-            nameField.setEditable(false);
-            nameLabel.setForeground (Color.green);
-        }
-        if(lastnameField.getText().length()==0){
-            flag=false;
-            lastnameLabel.setForeground (Color.red);
-            }
-        else{
-            lastnameField.setEditable(false);
-            lastnameLabel.setForeground (Color.green);
-            }
-        if(ageField.getText().length()==0){
-            flag=false;
-            ageLabel.setForeground (Color.red);
-            }
-        else{
-            ageField.setEditable(false);
-            ageLabel.setForeground (Color.green);
-            }
-        if(addressField.getText().length()==0){
-            flag=false;
-            addressLabel.setForeground (Color.red);
-            }
-        else{
-            addressField.setEditable(false);
-            addressLabel.setForeground (Color.green);
-            }
-        if(seniorityField.getText().length()==0){
-            flag=false;
-            seniorityLabel.setForeground (Color.red);
-            }
-        else{
-            seniorityField.setEditable(false);
-            seniorityLabel.setForeground (Color.green);
-            }
-        if(flag){
+        if(evt.getSource() == exit) {
             System.out.println("Exit");
+            super.setVisible(false);
+            super.remove(this);
+            Controller.MenuV();
         }
-        else
+        else {
+            boolean flag=true;
+            if(nameField.getText().length()==0){
+                flag=false;
+                nameLabel.setForeground (Color.red);
+            }
+            else{
+                nameField.setEditable(false);
+                nameLabel.setForeground (Color.green);
+            }
+            if(lastnameField.getText().length()==0){
+                flag=false;
+                lastnameLabel.setForeground (Color.red);
+                }
+            else{
+                lastnameField.setEditable(false);
+                lastnameLabel.setForeground (Color.green);
+                }
+            if(ageField.getText().length()==0){
+                flag=false;
+                ageLabel.setForeground (Color.red);
+                }
+            else{
+                ageField.setEditable(false);
+                ageLabel.setForeground (Color.green);
+                }
+            if(addressField.getText().length()==0){
+                flag=false;
+                addressLabel.setForeground (Color.red);
+                }
+            else{
+                addressField.setEditable(false);
+                addressLabel.setForeground (Color.green);
+                }
+            if(seniorityField.getText().length()==0){
+                flag=false;
+                seniorityLabel.setForeground (Color.red);
+                }
+            else{
+                seniorityField.setEditable(false);
+                seniorityLabel.setForeground (Color.green);
+                }
+            if(flag){
+                ArrayList<String> ppro = new ArrayList<String>();
+                ArrayList<String> apro = new ArrayList<String>();
+                for(int x=0;x<atable.getRowCount();x++){
+                        String res = (String)atable.getValueAt(x, 0);
+                        if(res.length()!=0)
+                            apro.add(res);
+                }
+                for(int x=0;x<ptable.getRowCount();x++){
+                        String res = (String)ptable.getValueAt(x, 0);
+                        if(res.length()!=0)
+                            ppro.add(res);
+                }
+                if(ppro.size()==0)
+                    ppro.add("_");
+                if(apro.size()==0)
+                    apro.add("_");
+                Controller.Update(nameField.getText().replace(" ","_")+" "+lastnameField.getText().replace(" ","_"),addressField.getText(),Integer.parseInt(idField.getText()),Integer.parseInt(ageField.getText()),Integer.parseInt(seniorityField.getText()),ppro,apro);
+                System.out.println("Exit");
+                super.setVisible(false);
+                super.remove(this);
+                Controller.MenuV();
+            }
             else
-            JOptionPane.showMessageDialog(this, "Please complete all required fields");
+                JOptionPane.showMessageDialog(this, "Please complete all required fields");
+        }
 
     }
 }

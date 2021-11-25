@@ -1,9 +1,11 @@
+package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.util.ArrayList;
 import java.util.List;
+import src.Controller.*;
 public class ReadView extends JPanel implements ActionListener {
     protected JTextField nameField;
     private JLabel nameLabel;
@@ -30,6 +32,7 @@ public class ReadView extends JPanel implements ActionListener {
     private final static String newline = "\n";
     private static final String solve = "Solve";
 
+    public ReadView(){}
     public ReadView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
@@ -37,6 +40,7 @@ public class ReadView extends JPanel implements ActionListener {
         String[] acolumnNames = {"Actual projects"};
         amodel.setColumnIdentifiers(acolumnNames);
         for(String row:actualProyects){
+            row=row.replace("_"," ");
             elements.add(row);
             Object[] adata = elements.toArray();
             amodel.addRow(adata);
@@ -49,6 +53,7 @@ public class ReadView extends JPanel implements ActionListener {
         String[] pcolumnNames = {"Past projects"};
         pmodel.setColumnIdentifiers(pcolumnNames);
         for(String row:pastProyects){
+            row=row.replace("_"," ");
             elements.add(row);
             Object[] pdata = elements.toArray();
             pmodel.addRow(pdata);
@@ -74,8 +79,8 @@ public class ReadView extends JPanel implements ActionListener {
         exit = new JButton("Exit");
         exit.addActionListener(this);
         idField.setText(String.valueOf(id));
-        nameField.setText(name);
-        lastnameField.setText(lastname);
+        nameField.setText(name.replace("_"," "));
+        lastnameField.setText(lastname.replace("_"," "));
         seniorityField.setText(String.valueOf(seniority));
         ageField.setText(String.valueOf(age));
         addressField.setText(address);
@@ -119,7 +124,9 @@ public class ReadView extends JPanel implements ActionListener {
         add(jsp,c);
     }
     public void actionPerformed(ActionEvent evt) {
-    System.out.println("Exit");
-
+        System.out.println("Exit");
+        super.setVisible(false);
+        super.remove(this);
+        Controller.MenuV();
     }
 }

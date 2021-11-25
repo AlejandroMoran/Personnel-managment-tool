@@ -1,3 +1,4 @@
+package src.Model;
 import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -10,7 +11,7 @@ import java.io.FileReader;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
-class Worker {
+public class Worker {
     private String name;
     private String addr;
     private int id;
@@ -92,11 +93,13 @@ class Worker {
         int r1=r.nextInt(20);
         int r2=r.nextInt(20);
         int r3=r.nextInt(20);
-        String[] names= new String[] {"Victoria","Renata","Sofia","Valeria","María José","María Fernanda","Valentina","Ximena","Regina","Camila","Alexander","Mateo","Santiago","Daniel","Sebastián","Miguel Ángel","Leonardo","Diego","Matías","Emiliano"};
+        String[] names= new String[] {"Victoria","Renata","Sofia","Valeria","María_José","María_Fernanda","Valentina","Ximena","Regina","Camila","Alexander","Mateo","Santiago","Daniel","Sebastián","Miguel_Ángel","Leonardo","Diego","Matías","Emiliano"};
         String[] lastNames = new String[]  {"Hernández","García","Martínez","López","González","Pérez","Rodríguez","Sánchez","Ramírez","Cruz","Flores","Gómez","Morán","Duque","Villota","Villanueva","Molina","Callejas","Obrador","Guerrero"};
-        this.name= names[r1]+" "+lastNames[r2]+" "+lastNames[r3];
+        this.name= names[r1]+" "+lastNames[r2]+"_"+lastNames[r3];
     }
-    public void GenerateProjects(int numProjectsA, int numProjectsP){
+    public void GenerateProjects(){
+        int numProjectsA=9;
+        int numProjectsP=40;
         Random r =new Random();
         r.nextInt(numProjectsA);
         int x = r.nextInt(numProjectsA)+1;
@@ -120,7 +123,6 @@ class Worker {
             }
         }
         x = r.nextInt((numProjectsA+numProjectsP)-actualProyects.size()+1);
-        System.out.println(x);
         while(pastProyects.size()!=x){
             z=r.nextInt(2);
             try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Projects.csv"))) {
