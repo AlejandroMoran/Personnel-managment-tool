@@ -7,6 +7,8 @@ import javax.swing.*;
 import java.awt.*;
 import src.Model.*;
 import src.View.*;
+import java.text.ParseException;
+import java.time.LocalDate;
 public class Controller{
     public static JFrame frame = new JFrame();
     public static ImageIcon img = new ImageIcon("Resources/Images/icon.png");
@@ -63,7 +65,7 @@ public class Controller{
     }
     public static void ReadV(int id){
         Read(id);
-        readP = new ReadView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),data.getAge(), data.getSeniority(), data.getActualProyects(),data.getPastProyects());
+        readP = new ReadView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),LocalDate.now().compareTo(LocalDate.parse(data.getAge())), LocalDate.now().compareTo(LocalDate.parse(data.getSeniority())), data.getActualProyects(),data.getPastProyects());
         frame.setTitle("Read");
         frame.add(readP);
         frame.pack();
@@ -77,15 +79,15 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
-    public static void DeleteV(int id){
+    public static void DeleteV(int id) {
         Read(id);
-        deleteP = new DeleteView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),data.getAge(), data.getSeniority(), data.getActualProyects(),data.getPastProyects());
+        deleteP = new DeleteView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),LocalDate.now().compareTo(LocalDate.parse(data.getAge())), LocalDate.now().compareTo(LocalDate.parse(data.getSeniority())), data.getActualProyects(),data.getPastProyects());
         frame.setTitle("Delete");
         frame.add(deleteP);
         frame.pack();
         frame.setVisible(true);
     }
-    public static void Create(String name,String addr,int id,int age,int seniority,List<String> pastProyects,List<String> actualProyects){
+    public static void Create(String name,String addr,int id,String age,String seniority,List<String> pastProyects,List<String> actualProyects){
         model.create(new Worker(name,addr,id,age,seniority,pastProyects,actualProyects));
         try {
         model.writeData();
@@ -110,7 +112,7 @@ public class Controller{
         e.printStackTrace();
         }
     }
-    public static void Update(String name,String addr,int id,int age,int seniority,List<String> pastProyects,List<String> actualProyects){
+    public static void Update(String name,String addr,int id,String age,String seniority,List<String> pastProyects,List<String> actualProyects){
         model.update(id,new Worker(name,addr,id,age,seniority,pastProyects,actualProyects));
         try {
         model.writeData();

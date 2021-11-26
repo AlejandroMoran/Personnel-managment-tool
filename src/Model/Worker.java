@@ -11,12 +11,13 @@ import java.io.FileReader;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
+import java.time.LocalDate;
 public class Worker {
     private String name;
     private String addr;
     private int id;
-    private int age;
-    private int seniority;
+    private String age;
+    private String seniority;
     private List<String> pastProyects= new ArrayList<String>();
     private List<String> actualProyects=new ArrayList<String>();
 
@@ -24,7 +25,7 @@ public class Worker {
     public Worker(int id){
      this.id=id;
     }
-    public Worker(String name,String addr,int id,int age,int seniority,List<String> pastProyects,List<String> actualProyects){
+    public Worker(String name,String addr,int id,String age,String seniority,List<String> pastProyects,List<String> actualProyects){
         this.name=name;
         this.addr=addr;
         this.id=id;
@@ -52,16 +53,16 @@ public class Worker {
     public void setId(int id){
         this.id=id;
     }
-    public int getAge(){
+    public String getAge(){
         return age;
     }
-    public void setAge(int age){
+    public void setAge(String age){
         this.age=age;
     }
-    public int getSeniority(){
+    public String getSeniority(){
         return seniority;
     }
-    public void setSeniority(int seniority){
+    public void setSeniority(String seniority){
         this.seniority=seniority;
     }
     public List<String> getPastProyects(){
@@ -85,8 +86,10 @@ public class Worker {
         } catch (IOException e) {
         e.printStackTrace();
         }
-        this.age=r.nextInt(50)+18;
-        this.seniority=r.nextInt(this.age-17);
+        LocalDate date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(50)+18));
+        this.age=date.toString();
+        date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(LocalDate.now().compareTo(LocalDate.parse(this.age)))));
+        this.seniority=date.toString();
     }
     public void GenerateName(){
         Random r =new Random();

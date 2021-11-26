@@ -36,7 +36,6 @@ public class LoginView extends JPanel implements ActionListener {
         if (e.getSource() == loginButton) {
             char[] input = passwordField.getPassword();
             if (isPasswordCorrect(input)) {
-                JOptionPane.showMessageDialog(this,"Success! You typed the right password.");
                 System.out.println("Exit");
                 super.setVisible(false);
                 super.remove(this);

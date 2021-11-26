@@ -39,7 +39,7 @@ public class MenuView extends JPanel implements ActionListener {
         c.gridwidth=2;
         add(exit,c);
     }
-    public void actionPerformed(ActionEvent evt) {
+    public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == exit) {
             System.out.println("Exit");
             System.exit(0);

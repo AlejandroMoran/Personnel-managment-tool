@@ -3,17 +3,21 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.text.ParseException;
 import src.Controller.*;
 public class UpdateView extends JPanel implements ActionListener {
+    private MaskFormatter dateMask;
+    private MaskFormatter dateMask2;
     protected JTextField nameField;
     private JLabel nameLabel;
-    protected JTextField ageField;
+    protected JFormattedTextField ageField = new JFormattedTextField();
     private JLabel ageLabel;
     protected JTextField addressField;
     private JLabel addressLabel;
-    protected JTextField seniorityField;
+    protected JFormattedTextField seniorityField = new JFormattedTextField();
     private JLabel seniorityLabel;
     protected JTextField lastnameField;
     private JLabel lastnameLabel;
@@ -34,7 +38,7 @@ public class UpdateView extends JPanel implements ActionListener {
     private static final String solve = "Solve";
 
     public UpdateView(){}
-    public UpdateView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
+    public UpdateView(int id,String name,String lastname,String address,String age,String seniority,List<String> actualProyects,List<String> pastProyects){
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
         ArrayList<String> elements = new ArrayList<String>();
@@ -64,17 +68,23 @@ public class UpdateView extends JPanel implements ActionListener {
         JScrollPane jsp=new JScrollPane(ptable);
         jsp.setPreferredSize(dim);
         jsp.setVisible(true);
+        try{
+            dateMask = new MaskFormatter("####-##-##");
+            dateMask2 = new MaskFormatter("####-##-##");
+        }catch(ParseException e){
+            System.out.println(e.getMessage());
+        }
+        dateMask.install(ageField);
+        dateMask2.install(seniorityField);
         idField = new JTextField(20);
         idLabel = new JLabel("Id");
         emptyLabel = new JLabel("");
         nameField = new JTextField(20);
         nameLabel = new JLabel("Name/s:");
-        ageField = new JTextField(20);
-        ageLabel = new JLabel("Age:");
+        ageLabel = new JLabel("Birthday(yyyy-mm-dd):");
         addressField = new JTextField(20);
         addressLabel = new JLabel("Address:");
-        seniorityField = new JTextField(20);
-        seniorityLabel = new JLabel("Seniority:");
+        seniorityLabel = new JLabel("Contract date(yyyy-mm-dd):");
         lastnameField = new JTextField(20);
         lastnameLabel = new JLabel("Lastname/s:");
         save = new JButton("Save data");
@@ -85,8 +95,8 @@ public class UpdateView extends JPanel implements ActionListener {
         idField.setText(String.valueOf(id));
         nameField.setText(name.replace("_"," "));
         lastnameField.setText(lastname.replace("_"," "));
-        seniorityField.setText(String.valueOf(seniority));
-        ageField.setText(String.valueOf(age));
+        seniorityField.setText(seniority);
+        ageField.setText(age);
         addressField.setText(address);
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
         atable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(enter, solve);
@@ -189,10 +199,10 @@ public class UpdateView extends JPanel implements ActionListener {
                 lastnameField.setEditable(false);
                 lastnameLabel.setForeground (Color.green);
                 }
-            if(ageField.getText().length()==0||!isNumeric(ageField.getText())){
+            if(!ageField.isEditValid()||dateMask.getPlaceholderCharacter()==ageField.getText().charAt(0)){
                 flag=false;
-                ageLabel.setForeground (Color.red);
-                }
+                ageLabel.setForeground(Color.red);
+            }
             else{
                 ageField.setEditable(false);
                 ageLabel.setForeground (Color.green);
@@ -205,10 +215,10 @@ public class UpdateView extends JPanel implements ActionListener {
                 addressField.setEditable(false);
                 addressLabel.setForeground (Color.green);
                 }
-            if(seniorityField.getText().length()==0||!isNumeric(seniorityField.getText())){
+            if(!seniorityField.isEditValid()||dateMask.getPlaceholderCharacter()==seniorityField.getText().charAt(0)){
                 flag=false;
                 seniorityLabel.setForeground (Color.red);
-                }
+            }
             else{
                 seniorityField.setEditable(false);
                 seniorityLabel.setForeground (Color.green);
@@ -230,7 +240,7 @@ public class UpdateView extends JPanel implements ActionListener {
                     ppro.add("_");
                 if(apro.size()==0)
                     apro.add("_");
-                Controller.Update(nameField.getText().replace(" ","_")+" "+lastnameField.getText().replace(" ","_"),addressField.getText(),Integer.parseInt(idField.getText()),Integer.parseInt(ageField.getText()),Integer.parseInt(seniorityField.getText()),ppro,apro);
+                Controller.Update(nameField.getText().replace(" ","_")+" "+lastnameField.getText().replace(" ","_"),addressField.getText(),Integer.parseInt(idField.getText()),ageField.getText(),seniorityField.getText(),ppro,apro);
                 System.out.println("Exit");
                 super.setVisible(false);
                 super.remove(this);
@@ -239,15 +249,5 @@ public class UpdateView extends JPanel implements ActionListener {
             else
                 JOptionPane.showMessageDialog(this, "Please complete all required fields or verify the inputs");
         }
-    }
-    public static boolean isNumeric(String string) {
-        int intValue;
-        try {
-            intValue = Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-        System.out.println("Input String cannot be parsed to Integer.");
-        }
-        return false;
     }
 }

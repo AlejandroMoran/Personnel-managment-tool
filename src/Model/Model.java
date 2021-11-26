@@ -37,13 +37,13 @@ public class Model{
                 if(arr[0].length()!=0){
                     x++;
                     if(arr.length>6){
-                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList(arr[6].split(" "))),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4], new ArrayList<String>(Arrays.asList(arr[6].split(" "))),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
                         }
                     else if(arr.length==6){
-                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4],new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
                     }
                     else{
-                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),Integer.parseInt(arr[2]),Integer.parseInt(arr[4]),new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList("_")));
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4],new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList("_")));
                     }
 
                 }

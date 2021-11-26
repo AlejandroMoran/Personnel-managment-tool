@@ -3,17 +3,21 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 import java.util.ArrayList;
 import src.Controller.*;
 import java.io.IOException;
+import java.text.ParseException;
 public class CreateView extends JPanel implements ActionListener {
+    private MaskFormatter dateMask;
+    private MaskFormatter dateMask2;
     protected JTextField nameField;
     private JLabel nameLabel;
-    protected JTextField ageField;
+    protected JFormattedTextField ageField = new JFormattedTextField();
     private JLabel ageLabel;
     protected JTextField addressField;
     private JLabel addressLabel;
-    protected JTextField seniorityField;
+    protected JFormattedTextField seniorityField = new JFormattedTextField();
     private JLabel seniorityLabel;
     protected JTextField lastnameField;
     private JLabel lastnameLabel;
@@ -34,7 +38,7 @@ public class CreateView extends JPanel implements ActionListener {
     private static final String solve = "Solve";
 
     public CreateView(){}
-    public CreateView(int id) {
+    public CreateView(int id){
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
         String[] acolumnNames = {"Actual projects"};
@@ -58,14 +62,20 @@ public class CreateView extends JPanel implements ActionListener {
         emptyLabel = new JLabel("");
         nameField = new JTextField(20);
         nameLabel = new JLabel("Enter name/s:");
-        ageField = new JTextField(20);
-        ageLabel = new JLabel("Enter age:");
+        ageLabel = new JLabel("Enter birthday(yyyy-mm-dd):");
         addressField = new JTextField(20);
         addressLabel = new JLabel("Enter address:");
-        seniorityField = new JTextField(20);
-        seniorityLabel = new JLabel("Enter seniority:");
+        seniorityLabel = new JLabel("Enter contract date(yyyy-mm-dd):");
         lastnameField = new JTextField(20);
         lastnameLabel = new JLabel("Enter lastname/s:");
+        try{
+            dateMask = new MaskFormatter("####-##-##");
+            dateMask2 = new MaskFormatter("####-##-##");
+        }catch(ParseException e){
+            System.out.println(e.getMessage());
+        }
+        dateMask.install(ageField);
+        dateMask2.install(seniorityField);
         save = new JButton("Save data");
         exit = new JButton("Go back");
         exit.addActionListener(this);
@@ -173,10 +183,10 @@ public class CreateView extends JPanel implements ActionListener {
                 lastnameField.setEditable(false);
                 lastnameLabel.setForeground (Color.green);
                 }
-            if(ageField.getText().length()==0||!isNumeric(ageField.getText())){
+            if(!ageField.isEditValid()||dateMask.getPlaceholderCharacter()==ageField.getText().charAt(0)){
                 flag=false;
                 ageLabel.setForeground (Color.red);
-                }
+            }
             else{
                 ageField.setEditable(false);
                 ageLabel.setForeground (Color.green);
@@ -189,10 +199,10 @@ public class CreateView extends JPanel implements ActionListener {
                 addressField.setEditable(false);
                 addressLabel.setForeground (Color.green);
                 }
-            if(seniorityField.getText().length()==0||!isNumeric(seniorityField.getText())){
+            if(!seniorityField.isEditValid()||dateMask.getPlaceholderCharacter()==seniorityField.getText().charAt(0)){
                 flag=false;
                 seniorityLabel.setForeground (Color.red);
-                }
+            }
             else{
                 seniorityField.setEditable(false);
                 seniorityLabel.setForeground (Color.green);
@@ -214,7 +224,7 @@ public class CreateView extends JPanel implements ActionListener {
                     ppro.add("_");
                 if(apro.size()==0)
                     apro.add("_");
-                Controller.Create(nameField.getText().replace(" ","_")+" "+lastnameField.getText().replace(" ","_"),addressField.getText(),Integer.parseInt(idField.getText()),Integer.parseInt(ageField.getText()),Integer.parseInt(seniorityField.getText()),ppro,apro);
+                Controller.Create(nameField.getText().replace(" ","_")+" "+lastnameField.getText().replace(" ","_"),addressField.getText(),Integer.parseInt(idField.getText()),ageField.getText(),seniorityField.getText(),ppro,apro);
                 System.out.println("Exit");
                 super.setVisible(false);
                 super.remove(this);
@@ -223,15 +233,5 @@ public class CreateView extends JPanel implements ActionListener {
             else
                 JOptionPane.showMessageDialog(this, "Please complete all required fields or verify the inputs");
         }
-    }
-    public static boolean isNumeric(String string) {
-        int intValue;
-        try {
-            intValue = Integer.parseInt(string);
-            return true;
-        } catch (NumberFormatException e) {
-        System.out.println("Input String cannot be parsed to Integer.");
-        }
-        return false;
     }
 }
