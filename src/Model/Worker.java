@@ -102,7 +102,7 @@ public class Worker {
         int numProjectsP=40;
         Random r =new Random();
         r.nextInt(numProjectsA);
-        int x = r.nextInt(numProjectsA)+1;
+        int x = r.nextInt(3)+1;
         int y=2,z;
         while(actualProyects.size()!=x){
             try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Projects.csv"))) {
@@ -122,7 +122,7 @@ public class Worker {
             e.printStackTrace();
             }
         }
-        x = r.nextInt((numProjectsA+numProjectsP)-actualProyects.size()+1);
+        x = r.nextInt((numProjectsA+numProjectsP)-actualProyects.size()+2);
         while(pastProyects.size()!=x){
             z=r.nextInt(2);
             try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Projects.csv"))) {

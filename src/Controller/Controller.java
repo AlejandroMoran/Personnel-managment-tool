@@ -9,6 +9,7 @@ import src.Model.*;
 import src.View.*;
 public class Controller{
     public static JFrame frame = new JFrame();
+    public static ImageIcon img = new ImageIcon("Resources/Images/icon.png");
     public static Worker data = new Worker();
     public static Model model = new Model();
     public static MenuView menuP = new MenuView();
@@ -17,13 +18,15 @@ public class Controller{
     public static UpdateView updateP = new UpdateView();
     public static ReadView readP = new ReadView();
     public static DeleteView deleteP = new DeleteView();
+    public static LoginView loginP = new LoginView();
     public static char state;
     public static void Init(){
+        frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(698, 177));
         frame.setResizable(false);
         frame.setTitle("Menu");
-        frame.add(menuP);
+        frame.add(loginP);
         frame.pack();
         frame.setVisible(true);
         try {

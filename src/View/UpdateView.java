@@ -189,7 +189,7 @@ public class UpdateView extends JPanel implements ActionListener {
                 lastnameField.setEditable(false);
                 lastnameLabel.setForeground (Color.green);
                 }
-            if(ageField.getText().length()==0){
+            if(ageField.getText().length()==0||!isNumeric(ageField.getText())){
                 flag=false;
                 ageLabel.setForeground (Color.red);
                 }
@@ -205,7 +205,7 @@ public class UpdateView extends JPanel implements ActionListener {
                 addressField.setEditable(false);
                 addressLabel.setForeground (Color.green);
                 }
-            if(seniorityField.getText().length()==0){
+            if(seniorityField.getText().length()==0||!isNumeric(seniorityField.getText())){
                 flag=false;
                 seniorityLabel.setForeground (Color.red);
                 }
@@ -237,8 +237,17 @@ public class UpdateView extends JPanel implements ActionListener {
                 Controller.MenuV();
             }
             else
-                JOptionPane.showMessageDialog(this, "Please complete all required fields");
+                JOptionPane.showMessageDialog(this, "Please complete all required fields or verify the inputs");
         }
-
+    }
+    public static boolean isNumeric(String string) {
+        int intValue;
+        try {
+            intValue = Integer.parseInt(string);
+            return true;
+        } catch (NumberFormatException e) {
+        System.out.println("Input String cannot be parsed to Integer.");
+        }
+        return false;
     }
 }
