@@ -2,12 +2,9 @@ package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.io.Serial;
 import java.util.Arrays;
 import src.Controller.*;
 public class LoginView extends JPanel implements ActionListener {
-    @Serial
-    private static final long serialVersionUID = 10;
     private final ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
     private final JLabel passwordLabel = new JLabel("Enter the password:");
     private final JPasswordField passwordField = new JPasswordField();
