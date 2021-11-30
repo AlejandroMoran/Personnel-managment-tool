@@ -2,11 +2,10 @@ package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import src.Controller.*;
 public class SearchView extends JPanel implements ActionListener {
     protected JTextField idField;
-    private JLabel idLabel;
+    private final JLabel idLabel;
     protected JButton search;
     protected JButton exit;
 
@@ -39,8 +38,8 @@ public class SearchView extends JPanel implements ActionListener {
             Controller.MenuV();
         }
         else {
-            if(idField.getText().length()!=0&&Controller.Search(Integer.parseInt(idField.getText()))==true){
-                System.out.println("Succesful");
+            if(idField.getText().length()!=0&&Controller.Search(Integer.parseInt(idField.getText()))){
+                System.out.println("Successful");
                 super.setVisible(false);
                 super.remove(this);
                 if(Controller.state=='r')

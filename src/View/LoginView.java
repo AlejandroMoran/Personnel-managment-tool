@@ -2,22 +2,23 @@ package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import java.io.Serial;
 import java.util.Arrays;
-import javax.swing.table.DefaultTableModel;
 import src.Controller.*;
 public class LoginView extends JPanel implements ActionListener {
+    @Serial
     private static final long serialVersionUID = 10;
-    private ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
-    private JLabel logoLabel = new JLabel(picLogo);
-    private JLabel passwordLabel = new JLabel("Enter the password:");
-    private JPasswordField passwordField = new JPasswordField();
-    private JButton loginButton = new JButton("LOGIN");
-    private JButton resetButton = new JButton("RESET");
+    private final ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
+    private final JLabel passwordLabel = new JLabel("Enter the password:");
+    private final JPasswordField passwordField = new JPasswordField();
+    private final JButton loginButton = new JButton("LOGIN");
+    private final JButton resetButton = new JButton("RESET");
 
    public LoginView() {
         super(new GridBagLayout());
         setBackground(new Color(21,72,84));
-        logoLabel.setPreferredSize(new Dimension(550, 100));
+       JLabel logoLabel = new JLabel(picLogo);
+       logoLabel.setPreferredSize(new Dimension(550, 100));
         passwordLabel.setForeground (Color.white);
         loginButton.addActionListener(this);
         resetButton.addActionListener(this);
@@ -50,7 +51,7 @@ public class LoginView extends JPanel implements ActionListener {
         }
     }
     private static boolean isPasswordCorrect(char[] input) {
-        boolean isCorrect = true;
+        boolean isCorrect;
         char[] correctPassword = { 'r', 'o', 'o', 't'};
 
         if (input.length != correctPassword.length) {

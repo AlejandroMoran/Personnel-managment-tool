@@ -1,6 +1,4 @@
 package src;
-import javax.swing.*;
-import java.awt.*;
 import src.Controller.*;
 public class main {
     public static void main(String[] a) {

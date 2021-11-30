@@ -2,7 +2,6 @@ package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import src.Controller.*;
 public class MenuView extends JPanel implements ActionListener {
     protected JButton create;

@@ -2,13 +2,8 @@ package src.Model;
 import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.*;
-import java.util.StringTokenizer;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
@@ -18,8 +13,8 @@ public class Worker {
     private int id;
     private String age;
     private String seniority;
-    private List<String> pastProyects= new ArrayList<String>();
-    private List<String> actualProyects=new ArrayList<String>();
+    private List<String> pastProyects= new ArrayList<>();
+    private List<String> actualProyects= new ArrayList<>();
 
     public Worker(){}
     public Worker(int id){
@@ -113,8 +108,10 @@ public class Worker {
                 String[] arr = line.split(",");
                 if(arr[0].length()!=0){
                     for (String element : actualProyects){
-                        if (element.contains(arr[0]))
-                            y=1;
+                        if (element.contains(arr[0])) {
+                            y = 1;
+                            break;
+                        }
                     }
                     if(actualProyects.size()==0||y==0)
                         this.actualProyects.add(arr[0]);
@@ -133,12 +130,16 @@ public class Worker {
                 String[] arr = line.split(",");
                 if(arr[z].length()!=0){
                     for (String element : actualProyects){
-                        if (element.contains(arr[z]))
-                            y=1;
+                        if (element.contains(arr[z])) {
+                            y = 1;
+                            break;
+                        }
                     }
                     for (String element : pastProyects){
-                        if (element.contains(arr[z]))
-                            y=1;
+                        if (element.contains(arr[z])) {
+                            y = 1;
+                            break;
+                        }
                     }
                     if(pastProyects.size()==0||y==0)
                         this.pastProyects.add(arr[z]);

@@ -19,24 +19,18 @@ public class ReadView extends JPanel implements ActionListener {
     private JLabel lastnameLabel;
     protected JTextField idField;
     private JLabel idLabel;
-    protected JTextField pprojectField;
-    private JLabel pprojectLabel;
-    protected JTextField aprojectField;
-    private JLabel aprojectLabel;
     private JLabel emptyLabel;
     protected JButton exit;
-    private DefaultTableModel amodel = new DefaultTableModel(0,0);
+    private final DefaultTableModel amodel = new DefaultTableModel(0,0);
     protected JTable atable = new JTable(amodel);
-    private DefaultTableModel pmodel = new DefaultTableModel(0,0);
+    private final DefaultTableModel pmodel = new DefaultTableModel(0,0);
     protected JTable ptable = new JTable(pmodel);
-    private final static String newline = "\n";
-    private static final String solve = "Solve";
 
     public ReadView(){}
     public ReadView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
-        ArrayList<String> elements = new ArrayList<String>();
+        ArrayList<String> elements = new ArrayList<>();
         String[] acolumnNames = {"Actual projects"};
         amodel.setColumnIdentifiers(acolumnNames);
         for(String row:actualProyects){

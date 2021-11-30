@@ -24,25 +24,20 @@ public class UpdateView extends JPanel implements ActionListener {
     private JLabel lastnameLabel;
     protected JTextField idField;
     private JLabel idLabel;
-    protected JTextField pprojectField;
-    private JLabel pprojectLabel;
-    protected JTextField aprojectField;
-    private JLabel aprojectLabel;
     private JLabel emptyLabel;
     protected JButton save;
     protected JButton exit;
-    private DefaultTableModel amodel = new DefaultTableModel(0,0);
+    private final DefaultTableModel amodel = new DefaultTableModel(0,0);
     protected JTable atable = new JTable(amodel);
-    private DefaultTableModel pmodel = new DefaultTableModel(0,0);
+    private final DefaultTableModel pmodel = new DefaultTableModel(0,0);
     protected JTable ptable = new JTable(pmodel);
-    private final static String newline = "\n";
     private static final String solve = "Solve";
 
     public UpdateView(){}
     public UpdateView(int id,String name,String lastname,String address,String age,String seniority,List<String> actualProyects,List<String> pastProyects){
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
-        ArrayList<String> elements = new ArrayList<String>();
+        ArrayList<String> elements = new ArrayList<>();
         String[] acolumnNames = {"Actual projects"};
         amodel.setColumnIdentifiers(acolumnNames);
         for(String row:actualProyects){
@@ -225,17 +220,17 @@ public class UpdateView extends JPanel implements ActionListener {
                 seniorityLabel.setForeground (Color.green);
                 }
             if(flag){
-                ArrayList<String> ppro = new ArrayList<String>();
-                ArrayList<String> apro = new ArrayList<String>();
+                ArrayList<String> ppro = new ArrayList<>();
+                ArrayList<String> apro = new ArrayList<>();
                 for(int x=0;x<atable.getRowCount();x++){
                         String res = (String)atable.getValueAt(x, 0);
                         if(res.length()!=0)
-                            apro.add(res);
+                            apro.add(res.replace(" ","_"));
                 }
                 for(int x=0;x<ptable.getRowCount();x++){
                         String res = (String)ptable.getValueAt(x, 0);
                         if(res.length()!=0)
-                            ppro.add(res);
+                            ppro.add(res.replace(" ","_"));
                 }
                 if(ppro.size()==0)
                     ppro.add("_");

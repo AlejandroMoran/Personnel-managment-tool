@@ -1,13 +1,10 @@
 package src.Controller;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import javax.swing.*;
 import java.awt.*;
 import src.Model.*;
 import src.View.*;
-import java.text.ParseException;
 import java.time.LocalDate;
 public class Controller{
     public static JFrame frame = new JFrame();
@@ -25,7 +22,7 @@ public class Controller{
     public static void Init(){
         frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setPreferredSize(new Dimension(698, 177));
+        frame.setPreferredSize(new Dimension(750, 200));
         frame.setResizable(false);
         frame.setTitle("Menu");
         frame.add(loginP);
@@ -57,7 +54,7 @@ public class Controller{
         frame.setVisible(true);
     }
     public static void CreateV(){
-        CreateView createP = new CreateView(model.getNextId());
+        createP = new CreateView(model.getNextId());
         frame.setTitle("Create");
         frame.add(createP);
         frame.pack();
@@ -96,10 +93,7 @@ public class Controller{
         }
     }
     public static boolean Search(int id){
-        if(model.search(id)==true)
-            return true;
-        else
-            return false;
+        return model.search(id);
     }
     public static void Read(int id){
         data = model.read(id);

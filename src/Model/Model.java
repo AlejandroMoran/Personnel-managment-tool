@@ -2,20 +2,13 @@
  *@author Moran Duque, Jose Alejandro
  */
 package src.Model;
-import java.util.Random;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.stream.*;
 import java.nio.file.StandardOpenOption;
-import java.util.StringTokenizer;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 
 public class Model{
     int nLines;
@@ -27,7 +20,7 @@ public class Model{
         }
         Workers = new Worker[nLines];
     }
-    public int getData() throws IOException{
+    public void getData() throws IOException{
         int x=1;
         boolean exit=true;
         while(exit){
@@ -37,13 +30,13 @@ public class Model{
                 if(arr[0].length()!=0){
                     x++;
                     if(arr.length>6){
-                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4], new ArrayList<String>(Arrays.asList(arr[6].split(" "))),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4], new ArrayList<>(Arrays.asList(arr[6].split(" "))), new ArrayList<>(Arrays.asList(arr[5].split(" "))));
                         }
                     else if(arr.length==6){
-                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4],new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList(arr[5].split(" "))));
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4], new ArrayList<>(Arrays.asList("_")), new ArrayList<>(Arrays.asList(arr[5].split(" "))));
                     }
                     else{
-                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4],new ArrayList<String>(Arrays.asList("_")),new ArrayList<String>(Arrays.asList("_")));
+                        Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4], new ArrayList<>(Arrays.asList("_")), new ArrayList<>(Arrays.asList("_")));
                     }
 
                 }
@@ -51,7 +44,6 @@ public class Model{
                     exit=false;
             }
         }
-        return x;
     }
     public void writeData() throws IOException{
         int i;
@@ -63,16 +55,15 @@ public class Model{
         String end=",,,,,,total="+(i-1);
         Files.writeString(Paths.get("Resources/Data/Database.csv"), end+ System.lineSeparator(),StandardOpenOption.APPEND);
     }
-    public String create(Worker worker){
+    public void create(Worker worker){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==worker.getId())
-                return "Error";
+                return;
         }
         nLines++;
         final int N = Workers.length;
         Workers = Arrays.copyOf(Workers, N + 1);
         Workers[N] = worker;
-        return "SUCCESSFUL";
     }
     public Worker read(int id){
         for(int i=1;i<Workers.length;i++){
@@ -81,7 +72,7 @@ public class Model{
         }
         return null;
     }
-    public String delete(int id){
+    public void delete(int id){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==id){
                 Worker[] temp = new Worker[Workers.length - 1];
@@ -89,30 +80,25 @@ public class Model{
                 System.arraycopy(Workers, i + 1,temp, i, Workers.length - i - 1);
                 Workers=temp;
                 nLines--;
-                return "SUCCESSFUL";
+                return;
             }
         }
         System.out.println(nLines);
-        return "Error";
     }
-    public String update(int id, Worker worker){
+    public void update(int id, Worker worker){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==id){
                 Workers[i]=worker;
-                return "SUCCESSFUL";
+                return;
             }
         }
-        return "Error";
     }
-    public boolean search(int id){
-        for(int i=1;i<Workers.length;i++){
-            if(Workers[i].getId()==id)
+    public boolean search(int id) {
+        for (int i = 1; i < Workers.length; i++) {
+            if (Workers[i].getId() == id)
                 return true;
         }
         return false;
-    }
-    public int getNLines(){
-        return nLines;
     }
     public int getNextId(){
         int[] ids = new int[nLines];
