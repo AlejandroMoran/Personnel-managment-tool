@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import src.Controller.*;
 import java.io.IOException;
 import java.text.ParseException;
+import java.time.LocalDate;
 public class CreateView extends JPanel implements ActionListener {
     private MaskFormatter dateMask;
     private MaskFormatter dateMask2;
@@ -183,7 +184,7 @@ public class CreateView extends JPanel implements ActionListener {
                 lastnameField.setEditable(false);
                 lastnameLabel.setForeground (Color.green);
                 }
-            if(!ageField.isEditValid()||dateMask.getPlaceholderCharacter()==ageField.getText().charAt(0)){
+            if(!ageField.isEditValid()||!isDate(ageField.getText())){
                 flag=false;
                 ageLabel.setForeground (Color.red);
             }
@@ -199,7 +200,7 @@ public class CreateView extends JPanel implements ActionListener {
                 addressField.setEditable(false);
                 addressLabel.setForeground (Color.green);
                 }
-            if(!seniorityField.isEditValid()||dateMask.getPlaceholderCharacter()==seniorityField.getText().charAt(0)){
+            if(!seniorityField.isEditValid()||!isDate(seniorityField.getText())){
                 flag=false;
                 seniorityLabel.setForeground (Color.red);
             }
@@ -233,5 +234,13 @@ public class CreateView extends JPanel implements ActionListener {
             else
                 JOptionPane.showMessageDialog(this, "Please complete all required fields or verify the inputs");
         }
+    }
+    private boolean isDate(String date){
+        try{
+            LocalDate.parse(date);
+        }catch(Exception e){
+            return false;
+        }
+        return true;
     }
 }
