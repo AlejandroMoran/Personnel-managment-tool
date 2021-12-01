@@ -13,31 +13,109 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Update panel class
+ */
 public class UpdateView extends JPanel implements ActionListener {
+    /**
+     * Mask for the ageField
+     */
     private MaskFormatter dateMask;
+    /**
+     * Mask for the seniorityField
+     */
     private MaskFormatter dateMask2;
+    /**
+     * Field for the name/s
+     */
     protected JTextField nameField;
+    /**
+     * Label for the nameField
+     */
     private JLabel nameLabel;
+    /**
+     * Formatted field for the birthday
+     */
     protected JFormattedTextField ageField = new JFormattedTextField();
+    /**
+     * Label for the ageField
+     */
     private JLabel ageLabel;
+    /**
+     * Field for the address
+     */
     protected JTextField addressField;
+    /**
+     * Label for the addressField
+     */
     private JLabel addressLabel;
+    /**
+     * Formatted Field for the contract date
+     */
     protected JFormattedTextField seniorityField = new JFormattedTextField();
+    /**
+     * Label for the seniorityField
+     */
     private JLabel seniorityLabel;
+    /**
+     * Field for the lastname/s
+     */
     protected JTextField lastnameField;
+    /**
+     * Label for the lastnameField
+     */
     private JLabel lastnameLabel;
+    /**
+     * Field for the id
+     */
     protected JTextField idField;
+    /**
+     * Label for the idField
+     */
     private JLabel idLabel;
+    /**
+     * Empty label for spacing
+     */
     private JLabel emptyLabel;
+    /**
+     * Save button
+     */
     protected JButton save;
+    /**
+     * Go back button
+     */
     protected JButton exit;
+    /**
+     * Model for the actual projects table
+     */
     private final DefaultTableModel amodel = new DefaultTableModel(0,0);
+    /**
+     * Table for the actual projects
+     */
     protected JTable atable = new JTable(amodel);
+    /**
+     * Model for the past prejects table
+     */
     private final DefaultTableModel pmodel = new DefaultTableModel(0,0);
+    /**
+     * Table for the last projects
+     */
     protected JTable ptable = new JTable(pmodel);
-    private static final String solve = "Solve";
 
     public UpdateView(){}
+
+    /**
+     * Allocates a ReadView objects and initializes it with the data sent
+     * @param id Id of the worker
+     * @param name Name of the worker
+     * @param lastname Lastname of the worker
+     * @param address Address of the worker
+     * @param age Age of the worker
+     * @param seniority Seniority of the worker
+     * @param actualProyects Actual projects of the worker
+     * @param pastProyects Past projects of the worker
+     */
     public UpdateView(int id,String name,String lastname,String address,String age,String seniority,List<String> actualProyects,List<String> pastProyects){
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
@@ -99,10 +177,10 @@ public class UpdateView extends JPanel implements ActionListener {
         ageField.setText(age);
         addressField.setText(address);
         KeyStroke enter = KeyStroke.getKeyStroke(KeyEvent.VK_ENTER, 0);
-        atable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(enter, solve);
-        atable.getActionMap().put(solve, new atableRow());
-        ptable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(enter, solve);
-        ptable.getActionMap().put(solve, new ptableRow());
+        atable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(enter, "solve");
+        atable.getActionMap().put("solve", new atableRow());
+        ptable.getInputMap(JTable.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(enter, "solve");
+        ptable.getActionMap().put("solve", new ptableRow());
         GridBagConstraints c = new GridBagConstraints();
         c.fill = GridBagConstraints.HORIZONTAL;
         add(idLabel,c);
@@ -137,8 +215,11 @@ public class UpdateView extends JPanel implements ActionListener {
         c.gridy=7;
         add(exit,c);
     }
-    private class atableRow extends AbstractAction {
 
+    /**
+     * Adds a cell to the  actual projects table if all the cells are full
+     */
+    private class atableRow extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
             boolean full=true;
@@ -156,6 +237,10 @@ public class UpdateView extends JPanel implements ActionListener {
             }
         }
     }
+
+    /**
+     * Adds a cell to the past projects table if all the cells are full
+     */
     private class ptableRow extends AbstractAction {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -178,7 +263,7 @@ public class UpdateView extends JPanel implements ActionListener {
     /**
      * If the exit button is pressed, removes the create view and calls the MenuV method of the controller.
      * If the Save date button is pressed, validates if the data is correct, if its correct removes the update view, calls the Update method of the controller and calls the MenuV method of the controller, Otherwise shows an error message and highlights the not valid data
-     * @param evt
+     * @param evt The press of any button
      */
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == exit) {
@@ -259,7 +344,7 @@ public class UpdateView extends JPanel implements ActionListener {
 
     /**
      * Validates if the date sent is correct
-     * @param date
+     * @param date date to validate
      * @return true if the date sent is valid and false otherwise
      */
     private boolean isDate(String date){

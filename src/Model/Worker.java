@@ -1,19 +1,60 @@
 package src.Model;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Worker template
+ */
 public class Worker {
+    /**
+     * Name of the worker
+     */
     private String name;
+    /**
+     * Address of the worker
+     */
     private String addr;
+    /**
+     * Id of the worker
+     */
     private int id;
+    /**
+     * Birthday of the worker
+     */
     private String age;
+    /**
+     * Contract date of the worker
+     */
     private String seniority;
+    /**
+     * Past projects of the worker
+     */
     private List<String> pastProyects= new ArrayList<>();
+    /**
+     * Actual projects of the worker
+     */
     private List<String> actualProyects= new ArrayList<>();
 
     public Worker(){}
+
+    /**
+     * Allocates a Worker object and initializes it with the id sent
+     * @param id Id of the worker
+     */
     public Worker(int id){
      this.id=id;
     }
+
+    /**
+     * Allocates a Worker object and initializes it with the data sent
+     * @param name Name of the worker
+     * @param addr Address of the worker
+     * @param id Id of the worker
+     * @param age Age of the worker
+     * @param seniority Seniority of the worker
+     * @param pastProyects Past projects of the worker
+     * @param actualProyects Actual projects of the worker
+     */
     public Worker(String name,String addr,int id,String age,String seniority,List<String> pastProyects,List<String> actualProyects){
         this.name=name;
         this.addr=addr;

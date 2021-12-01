@@ -9,27 +9,97 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Read panel class
+ */
 public class ReadView extends JPanel implements ActionListener {
+    /**
+     * Field for the name/s
+     */
     protected JTextField nameField;
+    /**
+     * Label for the nameField
+     */
     private JLabel nameLabel;
+    /**
+     * Field for the age
+     */
     protected JTextField ageField;
+    /**
+     * Label for the ageField
+     */
     private JLabel ageLabel;
+    /**
+     * Field for the address
+     */
     protected JTextField addressField;
+    /**
+     * Label for the addressField
+     */
     private JLabel addressLabel;
+    /**
+     * Field for the seniority
+     */
     protected JTextField seniorityField;
+    /**
+     * Label for the seniority field
+     */
     private JLabel seniorityLabel;
+    /**
+     * Field for the lastname/s
+     */
     protected JTextField lastnameField;
+    /**
+     * Label for the lastnameField
+     */
     private JLabel lastnameLabel;
+    /**
+     * Field for the id
+     */
     protected JTextField idField;
+    /**
+     * Label for the idField
+     */
     private JLabel idLabel;
+    /**
+     * Empty label for spacing
+     */
     private JLabel emptyLabel;
+    /**
+     * Exit button
+     */
     protected JButton exit;
+    /**
+     * Model for the actual projects table
+     */
     private final DefaultTableModel amodel = new DefaultTableModel(0,0);
+    /**
+     * Table for the actual projects
+     */
     protected JTable atable = new JTable(amodel);
+    /**
+     * Model for the past projects table
+     */
     private final DefaultTableModel pmodel = new DefaultTableModel(0,0);
+    /**
+     * Table for the past projects
+     */
     protected JTable ptable = new JTable(pmodel);
 
     public ReadView(){}
+
+    /**
+     * Allocates a ReadView objects and initializes it with the data sent
+     * @param id Id of the worker
+     * @param name Name of the worker
+     * @param lastname Lastname of the worker
+     * @param address Address of the worker
+     * @param age Age of the worker
+     * @param seniority Seniority of the worker
+     * @param actualProyects Actual projects of the worker
+     * @param pastProyects Past projects of the worker
+     */
     public ReadView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
@@ -123,7 +193,7 @@ public class ReadView extends JPanel implements ActionListener {
 
     /**
      * If the exit button is pressed, removes the read view and calls the MenuV of the controller
-     * @param evt
+     * @param evt The press of the exit button
      */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Exit");

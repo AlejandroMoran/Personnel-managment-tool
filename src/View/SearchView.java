@@ -6,12 +6,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * Search panel class
+ */
 public class SearchView extends JPanel implements ActionListener {
+    /**
+     * Field for the id
+     */
     protected JTextField idField;
+    /**
+     * Label for the idField
+     */
     private final JLabel idLabel;
+    /**
+     * Search button
+     */
     protected JButton search;
+    /**
+     * Go back button
+     */
     protected JButton exit;
 
+    /**
+     * Allocates a SearchView object and initializes it
+     */
     public SearchView() {
         super(new GridBagLayout());
         idField = new JTextField(10);
@@ -37,7 +56,7 @@ public class SearchView extends JPanel implements ActionListener {
     /**
      * If the exit button is pressed, removes the search view and calls the MenuV method of the controller
      * If the search button is presses, validates with the controller method Search if the id is on the database, if the id exists removes the search view and calls the either the ReadV, DeleteV or Update View methods of the controller depending on the controller state, Otherwise shows an error message
-     * @param evt
+     * @param evt The press of any button
      */
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == exit) {

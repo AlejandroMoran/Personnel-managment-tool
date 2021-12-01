@@ -6,13 +6,31 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-public class LoginView extends JPanel implements ActionListener {
-    private final ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
-    private final JLabel passwordLabel = new JLabel("Enter the password:");
-    private final JPasswordField passwordField = new JPasswordField();
-    private final JButton loginButton = new JButton("LOGIN");
-    private final JButton resetButton = new JButton("RESET");
 
+/**
+ * Login panel class
+ */
+public class LoginView extends JPanel implements ActionListener {
+    /**
+     * Logo of the program
+     */
+    private final ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
+    /**
+     * Label for the passwordField
+     */
+    private final JLabel passwordLabel = new JLabel("Enter the password:");
+    /**
+     * Field for the password
+     */
+    private final JPasswordField passwordField = new JPasswordField();
+    /**
+     * Login button
+     */
+    private final JButton loginButton = new JButton("LOGIN");
+
+    /**
+     * Allocates a LoginView object and initializes it
+     */
    public LoginView() {
        super(new GridBagLayout());
        setBackground(new Color(21,72,84));
@@ -20,7 +38,6 @@ public class LoginView extends JPanel implements ActionListener {
        logoLabel.setPreferredSize(new Dimension(550, 100));
        passwordLabel.setForeground (Color.white);
        loginButton.addActionListener(this);
-       resetButton.addActionListener(this);
        GridBagConstraints c = new GridBagConstraints();
        c.fill = GridBagConstraints.BOTH;
        add(logoLabel,c);
@@ -34,7 +51,7 @@ public class LoginView extends JPanel implements ActionListener {
 
     /**
      * If the login button is pressed, calls the isPasswordCorrect method of the controller with the input. If the input is correct removes the login view and calls the MenuV method of the controller, Otherwise shows an error message.
-     * @param e
+     * @param e The press of the login button
      */
     public void actionPerformed(ActionEvent e) {
        char[] input = passwordField.getPassword();
@@ -46,7 +63,5 @@ public class LoginView extends JPanel implements ActionListener {
        }
        else
            JOptionPane.showMessageDialog(this,"Invalid password. Try again.");
-        if (e.getSource() == resetButton)
-            passwordField.setText("");
     }
 }

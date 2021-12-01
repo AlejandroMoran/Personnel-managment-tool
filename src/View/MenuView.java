@@ -6,13 +6,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+
+/**
+ * Menu panel class
+ */
 public class MenuView extends JPanel implements ActionListener {
+    /**
+     * Create button
+     */
     protected JButton create;
+    /**
+     * Read button
+     */
     protected JButton read;
+    /**
+     * Update button
+     */
     protected JButton update;
+    /**
+     * Delete button
+     */
     protected JButton delete;
+    /**
+     * Exit button
+     */
     protected JButton exit;
 
+    /**
+     * Allocates a MenuView object and initializes it
+     */
     public MenuView() {
         super(new GridBagLayout());
         create = new JButton("Create");
@@ -43,12 +65,12 @@ public class MenuView extends JPanel implements ActionListener {
     }
 
     /**
-     * If the exit button is pressed, ends the program
+     * If the exit button is pressed, ends the application
      * If the create button is pressed, removes the menu view and calls the CreateV method of the controller
      * If the read button is pressed, removes the menu view, sets the controller state to 'r' and calls the SearchV method of the controller
      * If the update button is pressed, removes the menu view, sets the controller state to 'u' and calls the SearchV method of the controller
      * If the delete button is pressed, removes the menu view, sets the controller state to 'd' and calls the SearchV method of the controller
-     * @param evt
+     * @param evt The press of any button
      */
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == exit) {

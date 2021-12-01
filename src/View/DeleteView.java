@@ -9,28 +9,101 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+
+/**
+ * Delete panel class
+ */
 public class DeleteView extends JPanel implements ActionListener {
+    /**
+     * Field for the name/s
+     */
     protected JTextField nameField;
+    /**
+     * Label for the nameField
+     */
     private JLabel nameLabel;
+    /**
+     * Field for the age
+     */
     protected JTextField ageField;
+    /**
+     * Label for the ageField
+     */
     private JLabel ageLabel;
+    /**
+     * Field for the address
+     */
     protected JTextField addressField;
+    /**
+     * Label for the addressField
+     */
     private JLabel addressLabel;
+    /**
+     * Field for the seniority
+     */
     protected JTextField seniorityField;
+    /**
+     * Label for the seniorityField
+     */
     private JLabel seniorityLabel;
+    /**
+     * Field for the lastname/s
+     */
     protected JTextField lastnameField;
+    /**
+     * Label for the lastnameField
+     */
     private JLabel lastnameLabel;
+    /**
+     * Field for the id
+     */
     protected JTextField idField;
+    /**
+     * Label for the id Field
+     */
     private JLabel idLabel;
+    /**
+     * Empty label for spacing
+     */
     private JLabel emptyLabel;
+    /**
+     * Delete button
+     */
     protected JButton delete;
+    /**
+     * Go back button
+     */
     protected JButton exit;
+    /**
+     * Model for the actual projects table
+     */
     private final DefaultTableModel amodel = new DefaultTableModel(0,0);
+    /**
+     * Table for the actual projects
+     */
     protected JTable atable = new JTable(amodel);
+    /**
+     * Model for the past projects table
+     */
     private final DefaultTableModel pmodel = new DefaultTableModel(0,0);
+    /**
+     * Table for the past projects
+     */
     protected JTable ptable = new JTable(pmodel);
 
     public DeleteView(){}
+
+    /**
+     * Allocates a DeleteView object and initializes it with the data sent
+     * @param id Id of the worker
+     * @param name Name/s of the worker
+     * @param lastname Lastname/s of the worker
+     * @param address Address of the worker
+     * @param age Age of the worker
+     * @param seniority Seniority of the Worker
+     * @param actualProyects Actual projects of the worker
+     * @param pastProyects Past projects of the worker
+     */
     public DeleteView(int id,String name,String lastname,String address,int age,int seniority,List<String> actualProyects,List<String> pastProyects) {
         super(new GridBagLayout());
         Dimension dim= new Dimension(120,120);
@@ -130,7 +203,7 @@ public class DeleteView extends JPanel implements ActionListener {
 
     /**
      * If the delete button is pressed, calls the Delete method of the controller if the Delete button is pressed and then removes the delete view and calls the MenuV method of the controller, Otherwise just removes the delete view and calls the MenuV method
-     * @param evt
+     * @param evt The press of any button
      */
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() != exit) {

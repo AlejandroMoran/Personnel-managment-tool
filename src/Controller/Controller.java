@@ -15,22 +15,61 @@ import java.util.List;
 import java.util.Random;
 import java.util.stream.Stream;
 
+/**
+ * Main and only class of the controller
+ */
 public class Controller{
+    /**
+     * Main frame of the application
+     */
     public static JFrame frame = new JFrame();
+    /**
+     * Icon of the application
+     */
     public static ImageIcon img = new ImageIcon("Resources/Images/icon.png");
+    /**
+     * Worker instance that storage the worker data while its in the controller
+     */
     public static Worker data = new Worker();
+    /**
+     * Model instance which interacts with the database
+     */
     public static Model model = new Model();
+    /**
+     * Menu panel
+     */
     public static MenuView menuP = new MenuView();
+    /**
+     * Search panel
+     */
     public static SearchView searchP = new SearchView();
+    /**
+     * Create panel
+     */
     public static CreateView createP = new CreateView();
+    /**
+     * Update panel
+     */
     public static UpdateView updateP = new UpdateView();
+    /**
+     * Read panel
+     */
     public static ReadView readP = new ReadView();
+    /**
+     * Delete panel
+     */
     public static DeleteView deleteP = new DeleteView();
+    /**
+     * Login panel
+     */
     public static LoginView loginP = new LoginView();
+    /**
+     * Variable that indicates the state of the system('r','u','d')
+     */
     public static char state;
 
     /**
-     * Initializes the program, creates the window, sets the parameters, displays the login view and initializes the model
+     * Initializes the application, creates the window, sets the parameters, displays the login view and initializes the model
      */
     public static void Init(){
         frame.setIconImage(img.getImage());

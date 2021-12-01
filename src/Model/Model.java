@@ -8,14 +8,36 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.stream.Stream;
 
+/**
+ * Main class of the model
+ */
 public class Model{
+    /**
+     * Stores the number of records in the Application
+     */
     private int nLines;
+    /**
+     * Stores the password
+     */
     private char[] Password = { 'r', 'o', 'o', 't'};
+    /**
+     * Array used to dynamically store the data on the database
+     */
     public Worker[] Workers;
     public Model(){}
+
+    /**
+     *
+     * @param Password Password of the system
+     */
     public void setPassword(char[] Password){
         this.Password=Password;
     }
+
+    /**
+     *
+     * @return The current password of the system
+     */
     public char[] getPassword(){
         return Password;
     }
@@ -92,7 +114,7 @@ public class Model{
     }
 
     /**
-     *
+     * Searches for the id sent and reads it if exists
      * @param id Id of the worker
      * @return the worker with the id sent
      */
@@ -136,7 +158,7 @@ public class Model{
     }
 
     /**
-     *
+     * Searches for the id sent
      * @param id Id of the worker
      * @return true if the id is on the database and false otherwise
      */
@@ -149,7 +171,7 @@ public class Model{
     }
 
     /**
-     *
+     * Search for the smallest available id
      * @return the smallest available id
      */
     public int getNextId(){
