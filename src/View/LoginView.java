@@ -11,39 +11,39 @@ public class LoginView extends JPanel implements ActionListener {
     private final JButton resetButton = new JButton("RESET");
 
    public LoginView() {
-        super(new GridBagLayout());
-        setBackground(new Color(21,72,84));
+       super(new GridBagLayout());
+       setBackground(new Color(21,72,84));
        JLabel logoLabel = new JLabel(picLogo);
        logoLabel.setPreferredSize(new Dimension(550, 100));
-        passwordLabel.setForeground (Color.white);
-        loginButton.addActionListener(this);
-        resetButton.addActionListener(this);
-        GridBagConstraints c = new GridBagConstraints();
-        c.fill = GridBagConstraints.BOTH;
-        add(logoLabel,c);
-        c.gridy=1;
-        add(passwordLabel,c);
-        c.gridy=2;
-        add(passwordField,c);
-        c.gridy=3;
-        add(loginButton,c);
+       passwordLabel.setForeground (Color.white);
+       loginButton.addActionListener(this);
+       resetButton.addActionListener(this);
+       GridBagConstraints c = new GridBagConstraints();
+       c.fill = GridBagConstraints.BOTH;
+       add(logoLabel,c);
+       c.gridy=1;
+       add(passwordLabel,c);
+       c.gridy=2;
+       add(passwordField,c);
+       c.gridy=3;
+       add(loginButton,c);
     }
 
+    /**
+     * If the login button is pressed, calls the isPasswordCorrect method of the controller with the input. If the input is correct removes the login view and calls the MenuV method of the controller, Otherwise shows an error message.
+     * @param e
+     */
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == loginButton) {
-            char[] input = passwordField.getPassword();
-            if (Controller.isPasswordCorrect(input)) {
-                System.out.println("Exit");
-                super.setVisible(false);
-                super.remove(this);
-                Controller.MenuV();
-            } else {
-                JOptionPane.showMessageDialog(this,"Invalid password. Try again.");
-            }
-
-        }
-        if (e.getSource() == resetButton) {
+       char[] input = passwordField.getPassword();
+       if (Controller.isPasswordCorrect(input)) {
+           System.out.println("Exit");
+           super.setVisible(false);
+           super.remove(this);
+           Controller.MenuV();
+       }
+       else
+           JOptionPane.showMessageDialog(this,"Invalid password. Try again.");
+        if (e.getSource() == resetButton)
             passwordField.setText("");
-        }
     }
 }

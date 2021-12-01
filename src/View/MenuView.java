@@ -38,6 +38,15 @@ public class MenuView extends JPanel implements ActionListener {
         c.gridwidth=2;
         add(exit,c);
     }
+
+    /**
+     * If the exit button is pressed, ends the program
+     * If the create button is pressed, removes the menu view and calls the CreateV method of the controller
+     * If the read button is pressed, removes the menu view, sets the controller state to 'r' and calls the SearchV method of the controller
+     * If the update button is pressed, removes the menu view, sets the controller state to 'u' and calls the SearchV method of the controller
+     * If the delete button is pressed, removes the menu view, sets the controller state to 'd' and calls the SearchV method of the controller
+     * @param evt
+     */
     public void actionPerformed(ActionEvent evt){
         if(evt.getSource() == exit) {
             System.out.println("Exit");

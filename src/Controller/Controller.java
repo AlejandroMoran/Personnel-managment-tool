@@ -25,6 +25,10 @@ public class Controller{
     public static DeleteView deleteP = new DeleteView();
     public static LoginView loginP = new LoginView();
     public static char state;
+
+    /**
+     * Initializes the program, creates the window, sets the parameters, displays the login view and initializes the model
+     */
     public static void Init(){
         frame.setIconImage(img.getImage());
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -39,12 +43,11 @@ public class Controller{
         }catch (IOException e) {
         e.printStackTrace();
         }
-        try {
-        model.getData();
-        }catch (IOException e) {
-        e.printStackTrace();
-        }
     }
+
+    /**
+     * Displays the menu view
+     */
     public static void MenuV(){
         menuP = new MenuView();
         frame.setTitle("Menu");
@@ -52,6 +55,10 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Displays the search view
+     */
     public static void SearchV(){
         searchP = new SearchView();
         frame.setTitle("Search");
@@ -59,6 +66,10 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Displays the create view with the next smallest available id
+     */
     public static void CreateV(){
         createP = new CreateView(model.getNextId());
         frame.setTitle("Create");
@@ -66,6 +77,11 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Displays the read view with the data of the worker with the id sent
+     * @param id Id of the worker that we want to read
+     */
     public static void ReadV(int id){
         Read(id);
         readP = new ReadView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),LocalDate.now().compareTo(LocalDate.parse(data.getAge())), LocalDate.now().compareTo(LocalDate.parse(data.getSeniority())), data.getActualProyects(),data.getPastProyects());
@@ -74,6 +90,11 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Displays the update view with the data of the worker with the id sent
+     * @param id Id of the worker that we want to update
+     */
     public static void UpdateV(int id){
         Read(id);
         updateP = new UpdateView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),data.getAge(), data.getSeniority(), data.getActualProyects(),data.getPastProyects());
@@ -82,6 +103,11 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Displays the delete view with the data of the worker with the id sent
+     * @param id Id of the worker that we want to delete
+     */
     public static void DeleteV(int id) {
         Read(id);
         deleteP = new DeleteView(data.getId(), data.getName().split(" ")[0],data.getName().split(" ")[1], data.getAddr(),LocalDate.now().compareTo(LocalDate.parse(data.getAge())), LocalDate.now().compareTo(LocalDate.parse(data.getSeniority())), data.getActualProyects(),data.getPastProyects());
@@ -90,6 +116,17 @@ public class Controller{
         frame.pack();
         frame.setVisible(true);
     }
+
+    /**
+     * Calls the create method of model with the data sent
+     * @param name Name of the worker
+     * @param addr Address of the worker
+     * @param id Id of the Worker
+     * @param age Age of the worker (birthday)
+     * @param seniority Seniority of the worker (birthday)
+     * @param pastProyects Past projects of the worker
+     * @param actualProyects Actual projects of the worker
+     */
     public static void Create(String name,String addr,int id,String age,String seniority,List<String> pastProyects,List<String> actualProyects){
         model.create(new Worker(name,addr,id,age,seniority,pastProyects,actualProyects));
         try {
@@ -98,12 +135,28 @@ public class Controller{
         e.printStackTrace();
         }
     }
+
+    /**
+     * Calls the search method of the model with the id sent
+     * @param id Id of the worker
+     * @return true if the id exists on the database and false otherwise
+     */
     public static boolean Search(int id){
         return model.search(id);
     }
+
+    /**
+     * Calls the read method of the model with the id sent
+     * @param id Id of the worker
+     */
     public static void Read(int id){
         data = model.read(id);
     }
+
+    /**
+     * Calls the delete method of the model with the id sent
+     * @param id Id of the worker
+     */
     public static void Delete(int id){
         model.delete(id);
         try {
@@ -112,6 +165,17 @@ public class Controller{
         e.printStackTrace();
         }
     }
+
+    /**
+     * Calls the update method of the model with the data sent
+     * @param name Name of the worker
+     * @param addr Address of the worker
+     * @param id Id of the Worker
+     * @param age Age of the worker (birthday)
+     * @param seniority Seniority of the worker (birthday)
+     * @param pastProyects Past projects of the worker
+     * @param actualProyects Actual projects of the worker
+     */
     public static void Update(String name,String addr,int id,String age,String seniority,List<String> pastProyects,List<String> actualProyects){
         model.update(id,new Worker(name,addr,id,age,seniority,pastProyects,actualProyects));
         try {
@@ -120,6 +184,10 @@ public class Controller{
         e.printStackTrace();
         }
     }
+
+    /**
+     * Generates the first 100 records with random data if they don't exist
+     */
     public static void Test(){
         for(int i=1; i<=100; i++){
             if(!model.search(i)) {
@@ -136,6 +204,11 @@ public class Controller{
             e.printStackTrace();
         }
     }
+
+    /**
+     * Generate random address, birthday and contract date for the worker with the id sent
+     * @param i Id of the worker
+     */
     public static void GenerateData(int i){
         Random r =new Random();
         try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Addr.csv"))) {
@@ -148,6 +221,11 @@ public class Controller{
         date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(LocalDate.now().compareTo(LocalDate.parse(model.Workers[i].getAge())))));
         model.Workers[i].setSeniority(date.toString());
     }
+
+    /**
+     * Generates a random name for the worker with the id sent
+     * @param i Id of the worker
+     */
     public static void GenerateName(int i){
         Random r =new Random();
         int r1=r.nextInt(20);
@@ -157,6 +235,11 @@ public class Controller{
         String[] lastNames = new String[]  {"Hernández","García","Martínez","López","González","Pérez","Rodríguez","Sánchez","Ramírez","Cruz","Flores","Gómez","Morán","Duque","Villota","Villanueva","Molina","Callejas","Obrador","Guerrero"};
         model.Workers[i].setName(names[r1]+" "+lastNames[r2]+"_"+lastNames[r3]);
     }
+
+    /**
+     * Generate a random number of actual projects between 1-3 and a random number of past projects between 0-50 for the worker with the id sent
+     * @param i Id of the worker
+     */
     public static void GenerateProjects(int i){
         int numProjectsA=9;
         int numProjectsP=40;
@@ -213,6 +296,12 @@ public class Controller{
             }
         }
     }
+
+    /**
+     * Validates the password sent
+     * @param input Password inputted
+     * @return true if the password inputted is correct and false otherwise
+     */
     public static boolean isPasswordCorrect(char[] input) {
         boolean isCorrect;
 

@@ -170,6 +170,12 @@ public class UpdateView extends JPanel implements ActionListener {
             }
         }
     }
+
+    /**
+     * If the exit button is pressed, removes the create view and calls the MenuV method of the controller.
+     * If the Save date button is pressed, validates if the data is correct, if its correct removes the update view, calls the Update method of the controller and calls the MenuV method of the controller, Otherwise shows an error message and highlights the not valid data
+     * @param evt
+     */
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == exit) {
             System.out.println("Exit");
@@ -246,6 +252,12 @@ public class UpdateView extends JPanel implements ActionListener {
                 JOptionPane.showMessageDialog(this, "Please complete all required fields or verify the inputs");
         }
     }
+
+    /**
+     * Validates if the date sent is correct
+     * @param date
+     * @return true if the date sent is valid and false otherwise
+     */
     private boolean isDate(String date){
         try{
             LocalDate.parse(date);

@@ -117,6 +117,11 @@ public class ReadView extends JPanel implements ActionListener {
         c.gridx=4;
         add(jsp,c);
     }
+
+    /**
+     * If the exit button is pressed, removes the read view and calls the MenuV of the controller
+     * @param evt
+     */
     public void actionPerformed(ActionEvent evt) {
         System.out.println("Exit");
         super.setVisible(false);

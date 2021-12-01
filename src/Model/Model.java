@@ -21,12 +21,23 @@ public class Model{
     public char[] getPassword(){
         return Password;
     }
+
+    /**
+     * Initialize the model by getting the number of records in the database and calls getData()
+     * @throws IOException
+     */
     public void init() throws IOException{
         try (Stream<String> stream = Files.lines(Paths.get("Resources/Data/Database.csv"))) {
             nLines = (int)stream.count()-1;
         }
         Workers = new Worker[nLines];
+        getData();
     }
+
+    /**
+     * Reads and stores the records in the database on the Workers array
+     * @throws IOException
+     */
     public void getData() throws IOException{
         int x=1;
         boolean exit=true;
@@ -51,6 +62,11 @@ public class Model{
             }
         }
     }
+
+    /**
+     * Writes the records stored in the Workers array on the database
+     * @throws IOException
+     */
     public void writeData() throws IOException{
         int i;
         String header="id,name,age,address,seniority,actual projects,past projects";
@@ -61,6 +77,11 @@ public class Model{
         String end=",,,,,,total="+(i-1);
         Files.writeString(Paths.get("Resources/Data/Database.csv"), end+ System.lineSeparator(),StandardOpenOption.APPEND);
     }
+
+    /**
+     * Adds the record sent on the Workers array
+     * @param worker
+     */
     public void create(Worker worker){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==worker.getId())
@@ -71,6 +92,12 @@ public class Model{
         Workers = Arrays.copyOf(Workers, N + 1);
         Workers[N] = worker;
     }
+
+    /**
+     *
+     * @param id
+     * @return Returns the worker with the id sent
+     */
     public Worker read(int id){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==id)
@@ -78,6 +105,11 @@ public class Model{
         }
         return null;
     }
+
+    /**
+     * Deletes the worker with the id sent on the Workers array
+     * @param id
+     */
     public void delete(int id){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==id){
@@ -90,6 +122,12 @@ public class Model{
             }
         }
     }
+
+    /**
+     * Updates the data of the worker with the id sent with the new data sent
+     * @param id
+     * @param worker
+     */
     public void update(int id, Worker worker){
         for(int i=1;i<Workers.length;i++){
             if(Workers[i].getId()==id){
@@ -98,6 +136,12 @@ public class Model{
             }
         }
     }
+
+    /**
+     *
+     * @param id
+     * @return Returns true if the id is on the database and false otherwise
+     */
     public boolean search(int id) {
         for (int i = 1; i < Workers.length; i++) {
             if (Workers[i].getId() == id)
@@ -105,6 +149,11 @@ public class Model{
         }
         return false;
     }
+
+    /**
+     *
+     * @return Returns the smallest available id
+     */
     public int getNextId(){
         int[] ids = new int[nLines];
         for(int i=1;i<Workers.length;i++)

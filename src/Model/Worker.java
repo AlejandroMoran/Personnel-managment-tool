@@ -24,49 +24,114 @@ public class Worker {
         this.actualProyects=actualProyects;
     }
 
+    /**
+     *
+     * @return Current name of the worker
+     */
     public String getName(){
         return name;
     }
+
+    /**
+     *
+     * @param name name of the worker
+     */
     public void setName(String name){
         this.name=name;
     }
+
+    /**
+     *
+     * @return Current address of the worker
+     */
     public String getAddr(){
         return addr;
     }
+
+    /**
+     *
+     * @param addr Address of the worker
+     */
     public void setAddr(String addr){
         this.addr=addr;
     }
+
+    /**
+     *
+     * @return Id of the worker
+     */
     public int getId(){
         return id;
     }
-    public void setId(int id){
-        this.id=id;
-    }
+
+    /**
+     *
+     * @return Current age of the worker (birthday)
+     */
     public String getAge(){
         return age;
     }
+
+    /**
+     *
+     * @param age Age of the worker (birthday)
+     */
     public void setAge(String age){
         this.age=age;
     }
+
+    /**
+     *
+     * @return Current seniority of the worker (date of contract)
+     */
     public String getSeniority(){
         return seniority;
     }
+
+    /**
+     *
+     * @param seniority Seniority of the worker (date of contract)
+     */
     public void setSeniority(String seniority){
         this.seniority=seniority;
     }
+
+    /**
+     *
+     * @return Current past project/s of the worker
+     */
     public List<String> getPastProyects(){
         return pastProyects;
     }
+
+    /**
+     *
+     * @param pastProyects Past project/s of the worker
+     */
     public void setPastProyects(List<String> pastProyects){
         this.pastProyects=pastProyects;
     }
+
+    /**
+     *
+     * @return Current actual projects of the worker
+     */
     public List<String> getActualProyects(){
         return actualProyects;
     }
+
+    /**
+     *
+     * @param actualProyects Actual projects of the worker
+     */
     public void setActualProyects(List<String> actualProyects){
         this.actualProyects=actualProyects;
     }
 
+    /**
+     *
+     * @return All the data of the worker split by commas
+     */
     @Override
     public String toString(){
         return id+","+name+","+age+","+addr+","+seniority+","+actualProyects.toString().replace(",", "")+","+pastProyects.toString().replace(",", "");

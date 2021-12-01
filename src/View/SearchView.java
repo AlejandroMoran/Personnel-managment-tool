@@ -30,6 +30,12 @@ public class SearchView extends JPanel implements ActionListener {
         c.insets = new Insets(4, 0, 4, 50);
         add(exit,c);
     }
+
+    /**
+     * If the exit button is pressed, removes the search view and calls the MenuV method of the controller
+     * If the search button is presses, validates with the controller method Search if the id is on the database, if the id exists removes the search view and calls the either the ReadV, DeleteV or Update View methods of the controller depending on the controller state, Otherwise shows an error message
+     * @param evt
+     */
     public void actionPerformed(ActionEvent evt) {
         if(evt.getSource() == exit) {
             System.out.println("Exit");

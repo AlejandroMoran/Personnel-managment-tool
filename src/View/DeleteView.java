@@ -124,6 +124,11 @@ public class DeleteView extends JPanel implements ActionListener {
         c.gridy=7;
         add(exit,c);
     }
+
+    /**
+     * If the delete button is pressed, calls the Delete method of the controller if the Delete button is pressed and then removes the delete view and calls the MenuV method of the controller, Otherwise just removes the delete view and calls the MenuV method
+     * @param evt
+     */
     public void actionPerformed(ActionEvent evt) {
         if (evt.getSource() != exit) {
             Controller.Delete(Integer.parseInt(idField.getText()));
