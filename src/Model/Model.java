@@ -24,7 +24,7 @@ public class Model{
 
     /**
      * Initialize the model by getting the number of records in the database and calls getData()
-     * @throws IOException
+     * @throws IOException If the file is missing
      */
     public void init() throws IOException{
         try (Stream<String> stream = Files.lines(Paths.get("Resources/Data/Database.csv"))) {
@@ -36,7 +36,7 @@ public class Model{
 
     /**
      * Reads and stores the records in the database on the Workers array
-     * @throws IOException
+     * @throws IOException If there was an error reading from the data base
      */
     public void getData() throws IOException{
         int x=1;
@@ -65,7 +65,7 @@ public class Model{
 
     /**
      * Writes the records stored in the Workers array on the database
-     * @throws IOException
+     * @throws IOException If the file is missing
      */
     public void writeData() throws IOException{
         int i;
@@ -79,8 +79,8 @@ public class Model{
     }
 
     /**
-     * Adds the record sent on the Workers array
-     * @param worker
+     * Adds the record sent to the Workers array
+     * @param worker Workers data
      */
     public void create(Worker worker){
         for(int i=1;i<Workers.length;i++){
@@ -95,7 +95,7 @@ public class Model{
 
     /**
      *
-     * @param id
+     * @param id Id of the worker
      * @return Returns the worker with the id sent
      */
     public Worker read(int id){
@@ -108,7 +108,7 @@ public class Model{
 
     /**
      * Deletes the worker with the id sent on the Workers array
-     * @param id
+     * @param id Id of the worker
      */
     public void delete(int id){
         for(int i=1;i<Workers.length;i++){
@@ -125,8 +125,8 @@ public class Model{
 
     /**
      * Updates the data of the worker with the id sent with the new data sent
-     * @param id
-     * @param worker
+     * @param id Id of the worker
+     * @param worker Worker with the new data
      */
     public void update(int id, Worker worker){
         for(int i=1;i<Workers.length;i++){
@@ -139,7 +139,7 @@ public class Model{
 
     /**
      *
-     * @param id
+     * @param id Id of the worker
      * @return Returns true if the id is on the database and false otherwise
      */
     public boolean search(int id) {
