@@ -1,8 +1,11 @@
 package src.View;
-import java.awt.*;
-import java.awt.event.*;
+
+import src.Controller.Controller;
+
 import javax.swing.*;
-import src.Controller.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 public class SearchView extends JPanel implements ActionListener {
     protected JTextField idField;
     private final JLabel idLabel;

@@ -1,14 +1,17 @@
 package src.Controller;
+
+import src.Model.Model;
+import src.Model.Worker;
+import src.View.*;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
-import javax.swing.*;
-import java.awt.*;
-import src.Model.*;
-import src.View.*;
-import java.time.LocalDate;
 import java.util.Random;
 import java.util.stream.Stream;
 
@@ -231,8 +234,8 @@ public class Controller{
         int r1=r.nextInt(20);
         int r2=r.nextInt(20);
         int r3=r.nextInt(20);
-        String[] names= new String[] {"Victoria","Renata","Sofia","Valeria","María_José","María_Fernanda","Valentina","Ximena","Regina","Camila","Alexander","Mateo","Santiago","Daniel","Sebastián","Miguel_Ángel","Leonardo","Diego","Matías","Emiliano"};
-        String[] lastNames = new String[]  {"Hernández","García","Martínez","López","González","Pérez","Rodríguez","Sánchez","Ramírez","Cruz","Flores","Gómez","Morán","Duque","Villota","Villanueva","Molina","Callejas","Obrador","Guerrero"};
+        String[] names= new String[] {"Victoria","Renata","Sofia","Valeria","Maria_José","Maria_Fernanda","Valentina","Ximena","Regina","Camila","Alexander","Mateo","Santiago","Daniel","Sebastian","Miguel_Angel","Leonardo","Diego","Matias","Emiliano"};
+        String[] lastNames = new String[]  {"Hernandez","Garcia","Martinez","Lopez","Gonzalez","Perez","Rodriguez","Sanchez","Ramirez","Cruz","Flores","Gomez","Moran","Duque","Villota","Villanueva","Molina","Callejas","Obrador","Guerrero"};
         model.Workers[i].setName(names[r1]+" "+lastNames[r2]+"_"+lastNames[r3]);
     }
 

@@ -1,14 +1,12 @@
-/**
- *@author Moran Duque, Jose Alejandro
- */
 package src.Model;
+
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.stream.*;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.stream.Stream;
 
 public class Model{
     private int nLines;
@@ -96,7 +94,7 @@ public class Model{
     /**
      *
      * @param id Id of the worker
-     * @return Returns the worker with the id sent
+     * @return the worker with the id sent
      */
     public Worker read(int id){
         for(int i=1;i<Workers.length;i++){
@@ -140,7 +138,7 @@ public class Model{
     /**
      *
      * @param id Id of the worker
-     * @return Returns true if the id is on the database and false otherwise
+     * @return true if the id is on the database and false otherwise
      */
     public boolean search(int id) {
         for (int i = 1; i < Workers.length; i++) {
@@ -152,7 +150,7 @@ public class Model{
 
     /**
      *
-     * @return Returns the smallest available id
+     * @return the smallest available id
      */
     public int getNextId(){
         int[] ids = new int[nLines];

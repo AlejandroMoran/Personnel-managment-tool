@@ -1,11 +1,14 @@
 package src.View;
-import java.awt.*;
-import java.awt.event.*;
+
+import src.Controller.Controller;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
-import src.Controller.*;
 public class ReadView extends JPanel implements ActionListener {
     protected JTextField nameField;
     private JLabel nameLabel;

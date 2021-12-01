@@ -1,5 +1,8 @@
 package src;
-import src.Controller.*;
+/**
+ *@author Alejandro Moran
+ */
+import src.Controller.Controller;
 public class main {
     public static void main(String[] a) {
         Controller.Init();

@@ -1,14 +1,18 @@
 package src.View;
-import java.awt.*;
-import java.awt.event.*;
+
+import src.Controller.Controller;
+
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.text.MaskFormatter;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.text.ParseException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
-import java.text.ParseException;
-import src.Controller.*;
-import java.time.LocalDate;
 public class UpdateView extends JPanel implements ActionListener {
     private MaskFormatter dateMask;
     private MaskFormatter dateMask2;

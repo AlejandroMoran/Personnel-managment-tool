@@ -1,8 +1,11 @@
 package src.View;
-import java.awt.*;
-import java.awt.event.*;
+
+import src.Controller.Controller;
+
 import javax.swing.*;
-import src.Controller.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 public class LoginView extends JPanel implements ActionListener {
     private final ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
     private final JLabel passwordLabel = new JLabel("Enter the password:");

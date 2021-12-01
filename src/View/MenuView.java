@@ -1,8 +1,11 @@
 package src.View;
-import java.awt.*;
-import java.awt.event.*;
+
+import src.Controller.Controller;
+
 import javax.swing.*;
-import src.Controller.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 public class MenuView extends JPanel implements ActionListener {
     protected JButton create;
     protected JButton read;
