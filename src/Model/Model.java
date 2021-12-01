@@ -11,9 +11,16 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Model{
-    int nLines;
-    Worker[] Workers;
+    private int nLines;
+    private char[] Password = { 'r', 'o', 'o', 't'};
+    public Worker[] Workers;
     public Model(){}
+    public void setPassword(char[] Password){
+        this.Password=Password;
+    }
+    public char[] getPassword(){
+        return Password;
+    }
     public void init() throws IOException{
         try (Stream<String> stream = Files.lines(Paths.get("Resources/Data/Database.csv"))) {
             nLines = (int)stream.count()-1;
@@ -38,7 +45,6 @@ public class Model{
                     else{
                         Workers[x-1] = new Worker(arr[1],arr[3],Integer.parseInt(arr[0]),arr[2],arr[4], new ArrayList<>(Arrays.asList("_")), new ArrayList<>(Arrays.asList("_")));
                     }
-
                 }
                 else
                     exit=false;
@@ -83,7 +89,6 @@ public class Model{
                 return;
             }
         }
-        System.out.println(nLines);
     }
     public void update(int id, Worker worker){
         for(int i=1;i<Workers.length;i++){

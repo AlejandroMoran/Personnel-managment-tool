@@ -1,1 +1,1 @@
-Personnel-managment-tool in java using Swing
+Personnel-management-tool in java using Swing

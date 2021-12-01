@@ -2,7 +2,6 @@ package src.View;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
-import java.util.Arrays;
 import src.Controller.*;
 public class LoginView extends JPanel implements ActionListener {
     private final ImageIcon picLogo = new ImageIcon("Resources/Images/logo.png");
@@ -33,7 +32,7 @@ public class LoginView extends JPanel implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == loginButton) {
             char[] input = passwordField.getPassword();
-            if (isPasswordCorrect(input)) {
+            if (Controller.isPasswordCorrect(input)) {
                 System.out.println("Exit");
                 super.setVisible(false);
                 super.remove(this);
@@ -46,17 +45,5 @@ public class LoginView extends JPanel implements ActionListener {
         if (e.getSource() == resetButton) {
             passwordField.setText("");
         }
-    }
-    private static boolean isPasswordCorrect(char[] input) {
-        boolean isCorrect;
-        char[] correctPassword = { 'r', 'o', 'o', 't'};
-
-        if (input.length != correctPassword.length) {
-            isCorrect = false;
-        } else {
-            isCorrect = Arrays.equals (input, correctPassword);
-        }
-        Arrays.fill(correctPassword,'0');
-        return isCorrect;
     }
 }
