@@ -254,14 +254,14 @@ public class Controller{
     public static void GenerateData(int i){
         Random r =new Random();
         try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Addr.csv"))) {
-            model.Workers[i].setAddr(lines.skip(r.nextInt(251900)).findFirst().get().replace(",", ""));
+            model.read(i).setAddr(lines.skip(r.nextInt(251900)).findFirst().get().replace(",", ""));
         } catch (IOException e) {
             e.printStackTrace();
         }
         LocalDate date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(50)+18));
-        model.Workers[i].setAge(date.toString());
-        date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(LocalDate.now().compareTo(LocalDate.parse(model.Workers[i].getAge())))));
-        model.Workers[i].setSeniority(date.toString());
+        model.read(i).setAge(date.toString());
+        date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(LocalDate.now().compareTo(LocalDate.parse(model.read(i).getAge())))));
+        model.read(i).setSeniority(date.toString());
     }
 
     /**
@@ -275,7 +275,7 @@ public class Controller{
         int r3=r.nextInt(20);
         String[] names= new String[] {"Victoria","Renata","Sofia","Valeria","Maria_José","Maria_Fernanda","Valentina","Ximena","Regina","Camila","Alexander","Mateo","Santiago","Daniel","Sebastian","Miguel_Angel","Leonardo","Diego","Matias","Emiliano"};
         String[] lastNames = new String[]  {"Hernandez","Garcia","Martinez","Lopez","Gonzalez","Perez","Rodriguez","Sanchez","Ramirez","Cruz","Flores","Gomez","Moran","Duque","Villota","Villanueva","Molina","Callejas","Obrador","Guerrero"};
-        model.Workers[i].setName(names[r1]+" "+lastNames[r2]+"_"+lastNames[r3]);
+        model.read(i).setName(names[r1]+" "+lastNames[r2]+"_"+lastNames[r3]);
     }
 
     /**
@@ -286,22 +286,21 @@ public class Controller{
         int numProjectsA=9;
         int numProjectsP=40;
         Random r =new Random();
-        r.nextInt(numProjectsA);
         int x = r.nextInt(3)+1;
         int y=2,z;
-        while(model.Workers[i].getActualProyects().size()!=x){
+        while(model.read(i).getActualProyects().size()!=x){
             try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Projects.csv"))) {
-                String line = lines.skip(r.nextInt(numProjectsA)+1).findFirst().get();
+                String line = lines.skip(r.nextInt(numProjectsA+1)+1).findFirst().get();
                 String[] arr = line.split(",");
                 if(arr[0].length()!=0){
-                    for (String element : model.Workers[i].getActualProyects()){
+                    for (String element : model.read(i).getActualProyects()){
                         if (element.contains(arr[0])) {
                             y = 1;
                             break;
                         }
                     }
-                    if(model.Workers[i].getActualProyects().size()==0||y==0)
-                        model.Workers[i].getActualProyects().add(arr[0]);
+                    if(model.read(i).getActualProyects().size()==0||y==0)
+                        model.read(i).getActualProyects().add(arr[0]);
                     y=0;
                 }
 
@@ -309,30 +308,29 @@ public class Controller{
                 e.printStackTrace();
             }
         }
-        x = r.nextInt((numProjectsA+numProjectsP)-model.Workers[i].getActualProyects().size()+2);
-        while(model.Workers[i].getPastProyects().size()!=x){
+        x = r.nextInt((numProjectsA+numProjectsP)-model.read(i).getActualProyects().size()+2);
+        while(model.read(i).getPastProyects().size()!=x){
             z=r.nextInt(2);
             try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Projects.csv"))) {
                 String line = lines.skip(r.nextInt(numProjectsP)+1).findFirst().get();
                 String[] arr = line.split(",");
                 if(arr[z].length()!=0){
-                    for (String element : model.Workers[i].getActualProyects()){
+                    for (String element : model.read(i).getActualProyects()){
                         if (element.contains(arr[z])) {
                             y = 1;
                             break;
                         }
                     }
-                    for (String element : model.Workers[i].getPastProyects()){
+                    for (String element : model.read(i).getPastProyects()){
                         if (element.contains(arr[z])) {
                             y = 1;
                             break;
                         }
                     }
-                    if(model.Workers[i].getPastProyects().size()==0||y==0)
-                        model.Workers[i].getPastProyects().add(arr[z]);
+                    if(model.read(i).getPastProyects().size()==0||y==0)
+                        model.read(i).getPastProyects().add(arr[z]);
                     y=0;
                 }
-
             } catch (IOException e) {
                 e.printStackTrace();
             }

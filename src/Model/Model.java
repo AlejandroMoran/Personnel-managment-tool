@@ -23,7 +23,7 @@ public class Model{
     /**
      * Array used to dynamically store the data on the database
      */
-    public Worker[] Workers;
+    private Worker[] Workers;
     public Model(){}
 
     /**
