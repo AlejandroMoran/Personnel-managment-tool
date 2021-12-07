@@ -258,9 +258,9 @@ public class Controller{
         } catch (IOException e) {
             e.printStackTrace();
         }
-        LocalDate date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(50)+18));
+        LocalDate date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(51)+18));
         model.read(i).setAge(date.toString());
-        date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(LocalDate.now().compareTo(LocalDate.parse(model.read(i).getAge())))));
+        date = LocalDate.now().withYear(LocalDate.now().getYear()-(r.nextInt(LocalDate.now().compareTo(LocalDate.parse(model.read(i).getAge()))-17)));
         model.read(i).setSeniority(date.toString());
     }
 
