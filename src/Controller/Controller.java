@@ -236,8 +236,8 @@ public class Controller{
                 data = new Worker(i);
                 model.create(data);
                 GenerateName(i);
-                GenerateProjects(i);
                 GenerateData(i);
+                GenerateProjects(i);
             }
         }
         try {
@@ -308,7 +308,14 @@ public class Controller{
                 e.printStackTrace();
             }
         }
-        x = r.nextInt((numProjectsA+numProjectsP)-model.read(i).getActualProyects().size()+2);
+        x=0;
+        for(int it=0;it<LocalDate.now().compareTo(LocalDate.parse(model.read(i).getSeniority()));it++) {
+            x += r.nextInt(3) + 1;
+            if (x > (50 - model.read(i).getActualProyects().size())) {
+                x = 50 - model.read(i).getActualProyects().size();
+                break;
+            }
+        }
         while(model.read(i).getPastProyects().size()!=x){
             z=r.nextInt(2);
             try(Stream<String> lines = Files.lines(Paths.get("Resources/Data/Projects.csv"))) {
