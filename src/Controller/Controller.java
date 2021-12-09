@@ -76,7 +76,7 @@ public class Controller{
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setPreferredSize(new Dimension(750, 200));
         frame.setResizable(false);
-        frame.setTitle("Menu");
+        frame.setTitle("Login");
         frame.add(loginP);
         frame.pack();
         frame.setVisible(true);
